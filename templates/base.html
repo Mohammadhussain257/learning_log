@@ -11,6 +11,12 @@
     <h4>
         <a href="{% url 'learning_logs:topics' %}">Topics</a>
     </h4>
+    {% if user.is_authenticated %}
+        {{ user.username }}
+        <a href="{% url 'users:logout' %}">Log out</a>
+        {% else %}
+        <a href="{% url 'users:login' %}">Log In</a>
+    {% endif %}
 {% block content %}{% endblock content %}
 </body>
 </html>
