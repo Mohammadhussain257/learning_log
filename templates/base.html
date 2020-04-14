@@ -21,12 +21,12 @@
           </li>
         </ul>
         <span class="navbar-text">
-            <a href="{% url 'users:register' %}">Register</a>
-            <a href="{% url 'users:login' %}">Log In</a>
             {% if user.is_authenticated %}
-                {{ user.username }}
+                Hello, {{ user.username }}
                 <a href="{% url 'users:logout' %}">Log out</a>
             {% else %}
+                <a href="{% url 'users:register' %}">Register</a>
+                <a href="{% url 'users:login' %}">Log In</a>
             {% endif %}
         </span>
       </div>
