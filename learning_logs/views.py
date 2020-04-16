@@ -4,6 +4,7 @@ from .forms import TopicForm, EntryForm
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
+
 # Create your views here.
 def index(request):
     """The home page for learning log"""
@@ -17,6 +18,7 @@ def topics(request):
     context = {'topics': topics}
     return render(request, 'topics.html', context)
 
+
 @login_required
 def topic(request, topic_id):
     """Show a single topic and all its entries"""
@@ -27,6 +29,7 @@ def topic(request, topic_id):
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     return render(request, 'topic.html', context)
+
 
 @login_required
 def new_topic(request):
@@ -45,6 +48,7 @@ def new_topic(request):
     # Display a blank or invalid form
     context = {'form': form}
     return render(request, 'new_topic.html', context)
+
 
 @login_required
 def new_entry(request, topic_id):
@@ -67,6 +71,7 @@ def new_entry(request, topic_id):
     context = {'topic': topic, 'form': form}
     return render(request, 'new_entry.html', context)
 
+
 @login_required
 def edit_entry(request, entry_id):
     """Edit an existing enty"""
@@ -85,3 +90,8 @@ def edit_entry(request, entry_id):
             return redirect('learning_logs:topic', topic_id=topic.id)
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'edit_entry.html', context)
+
+
+@login_required
+def admin(request):
+    return render(request)
